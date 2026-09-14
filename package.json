@@ -1,0 +1,35 @@
+{
+  "name": "lucky-wheel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "配置驱动的大转盘抽奖系统：奖品/文案/颜色/款式/次数全部可配置",
+  "scripts": {
+    "dev": "concurrently -k -n server,front -c blue,green \"npm:dev:server\" \"npm:dev:front\"",
+    "dev:server": "node server/index.js",
+    "dev:front": "vite",
+    "build": "vite build",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "@lucky-canvas/vue": "^0.1.1",
+    "@tsparticles/slim": "^4.4.0",
+    "@tsparticles/vue3": "^4.4.0",
+    "animate.css": "^4.1.1",
+    "canvas-confetti": "^1.9.4",
+    "concurrently": "^9.1.0",
+    "element-plus": "^2.14.5",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^5.4.11"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@11.5.2"
+}

@@ -1,0 +1,19 @@
+services:
+  lucky-wheel:
+    build: .
+    image: lucky-wheel:latest
+    container_name: lucky-wheel
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3001}:3001" # 宿主机端口，改 PORT 环境变量即可换
+    environment:
+      # 管理后台密码，务必在部署时改掉默认值（.env 文件或 -e 传入）
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+    volumes:
+      - ./data:/app/data # 全部活动数据（配置/奖品/记录），升级镜像不丢
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3001/api/session').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
