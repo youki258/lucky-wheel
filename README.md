@@ -20,12 +20,26 @@ pnpm start        # 纯后端生产模式（3001 同时托管 dist）
 
 ## Docker 部署（推荐）
 
+镜像由 GitHub Actions 自动构建并发布到 GHCR（私有镜像 `ghcr.io/youki258/lucky-wheel:latest`），推代码即构建。
+
+### 部署到服务器（ssh az）
+
 ```bash
-docker compose up -d --build          # 构建并启动
-docker compose logs -f lucky-wheel    # 看日志
+# 1. 服务器上登录 GHCR（首次；PAT 需勾选 read:packages 权限）
+echo 你的PAT | docker login ghcr.io -u youki258 --password-stdin
+
+# 2. 拉镜像 + 启动（无需在服务器上装 Node/pnpm）
+ssh az -t "mkdir -p ~/lucky-wheel && cd ~/lucky-wheel \\
+  && [ -f docker-compose.yml ] || curl -fsSL https://raw.githubusercontent.com/youki258/lucky-wheel/main/docker-compose.yml -o docker-compose.yml \\
+  && echo 'ADMIN_PASSWORD=你的密码' > .env \\
+  && docker compose pull && docker compose up -d"
+
+# 3. HTTPS 反代（nginx/caddy 指向 127.0.0.1:3001）
 ```
 
-环境变量（写在 `.env` 或 shell 里）：
+也可以 rsync 源码到服务器后 `docker compose up -d --build` 现场构建（不依赖 GHCR 登录）。
+
+环境变量（写在服务器上的 `.env` 里）：
 
 | 变量 | 默认 | 说明 |
 |---|---|---|
@@ -33,6 +47,14 @@ docker compose logs -f lucky-wheel    # 看日志
 | `ADMIN_PASSWORD` | `admin123` | 后台密码，**部署时务必改** |
 
 数据卷 `./data:/app/data`：全部活动数据都在宿主机 `data/` 目录，升级/重建镜像不丢数据（已验证容器销毁重建记录仍在）。
+
+常用命令：
+
+```bash
+docker compose pull && docker compose up -d   # 更新到最新镜像
+docker compose logs -f lucky-wheel            # 看日志
+docker compose restart                        # 重启
+```
 
 ### 部署到服务器（ssh az）
 
