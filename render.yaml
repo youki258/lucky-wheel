@@ -1,0 +1,14 @@
+# Render 蓝图：New Blueprint Instance 时自动识别，也可手动建 Web Service（Docker）
+services:
+  - type: web
+    name: lucky-wheel
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/session
+    envVars:
+      - key: ADMIN_PASSWORD
+        sync: false # 部署时在 Dashboard 填写强密码
+      - key: NODE_ENV
+        value: production

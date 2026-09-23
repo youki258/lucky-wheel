@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import confetti from 'canvas-confetti'
-import { api } from '../api.js'
+import { api, isDemo } from '../api.js'
 import { drawParticles } from '../particles.js'
 import WheelTheme from '../themes/WheelTheme.vue'
 import GridTheme from '../themes/GridTheme.vue'
@@ -264,6 +264,7 @@ function playChime() {
     </div>
 
     <router-link class="admin-link" to="/admin">管理</router-link>
+    <span v-if="isDemo" class="demo-badge" title="纯前端演示：数据保存在你的浏览器，刷新不丢">DEMO · 数据存本机</span>
 
     <div v-if="showModal" class="mask" @click.self="closeResult">
       <div class="modal animate__animated animate__bounceIn" :style="modalStyle">
@@ -493,6 +494,20 @@ function playChime() {
 }
 .admin-link:hover {
   color: color-mix(in srgb, var(--link, #888888) 85%, transparent);
+}
+.demo-badge {
+  position: fixed;
+  left: 14px;
+  bottom: 12px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  color: color-mix(in srgb, var(--link, #888888) 55%, transparent);
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid color-mix(in srgb, var(--link, #888888) 30%, transparent);
+  padding: 3px 10px;
+  border-radius: 999px;
+  pointer-events: none;
 }
 
 .mask {

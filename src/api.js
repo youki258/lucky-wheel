@@ -1,3 +1,6 @@
+import { api as demoApi } from './demo/api-demo.js'
+
+// 真实后端调用（Docker / 本地 dev / Render 实例走这里）
 async function request(url, options = {}) {
   const res = await fetch(url, {
     headers: { 'Content-Type': 'application/json' },
@@ -20,7 +23,7 @@ async function request(url, options = {}) {
 const post = (url, body) => request(url, { method: 'POST', body: body !== undefined ? JSON.stringify(body) : undefined })
 const put = (url, body) => request(url, { method: 'PUT', body: JSON.stringify(body) })
 
-export const api = {
+const realApi = {
   // 抽奖页
   public: () => request('/api/public'),
   draw: () => post('/api/draw'),
@@ -43,3 +46,8 @@ export const api = {
   exportUrl: '/api/export',
   recordsCsvUrl: '/api/records/export.csv',
 }
+
+// VITE_DEMO 构建时被 Vite 静态替换：true → demo 分支；未设 → false，
+// Rollup 摇掉 demoApi（验收：生产 dist 中 grep 不到 lw_demo 种子串）。
+export const isDemo = import.meta.env.VITE_DEMO === 'true'
+export const api = isDemo ? demoApi : realApi

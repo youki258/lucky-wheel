@@ -2,7 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Setting, Goods, Tickets, Files, RefreshRight, SwitchButton, Lock, Plus, Delete, Top, Bottom, Upload } from '@element-plus/icons-vue'
-import { api } from '../api.js'
+import { api, isDemo } from '../api.js'
 import { adminParticles } from '../particles.js'
 import { themePresets } from '../theme-presets.js'
 
@@ -257,7 +257,7 @@ async function onImportFile(ev) {
       <el-container class="right">
         <el-header class="tophead glass-sub" height="58px">
           <h2>{{ TAB_TITLES[tab] }}</h2>
-          <span class="who">管理员</span>
+          <span class="who">{{ isDemo ? 'DEMO · 数据存本机' : '管理员' }}</span>
         </el-header>
 
         <el-main class="main">
