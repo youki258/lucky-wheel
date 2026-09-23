@@ -3,32 +3,44 @@
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Demo](https://img.shields.io/badge/live-demo-brightgreen.svg)](https://youki258.github.io/lucky-wheel/)
 
-面向年会、活动、门店促销等场景的网页抽奖大屏。免安装，浏览器打开即可使用；标题、文案、奖品、配色、款式与抽奖次数均可在管理后台配置，无需修改代码。
+可配置的网页抽奖大屏，适用于年会、活动、门店促销等场景。支持大转盘 / 九宫格 / 老虎机三种款式；标题、文案、奖品、配色、抽奖次数均可在管理后台配置，无需修改代码。
 
 **在线 Demo：** [youki258.github.io/lucky-wheel](https://youki258.github.io/lucky-wheel/)
 
-- 大转盘 / 九宫格 / 老虎机 三种款式，后台一键切换
-- 管理后台 `/#/admin`，默认密码 `admin123`
-- Demo 数据保存在浏览器 localStorage，换设备或清空缓存会重置
+## 功能特性
 
-## 功能
+- [x] 大转盘 / 九宫格 / 老虎机，后台一键切换
+- [x] 标题、文案、配色、款式、总抽奖次数可视化配置
+- [x] 奖品支持名称、图片、份数、权重，按「剩余份数 × 权重」加权随机
+- [x] 抽中的奖品从盘面移除，库存不超发
+- [x] 中奖记录、CSV 导出、JSON 备份 / 恢复
+- [x] 粒子背景、中奖彩带、音效
+- [x] GitHub Pages Demo，免服务器直接体验
+- [x] Docker 一键部署，数据持久化到本地 JSON
 
-| 页面 | 说明 |
-|---|---|
-| 抽奖页 `/#/` | 转盘抽奖、剩余次数、中奖弹窗 |
-| 管理后台 `/#/admin` | 标题 / 配色 / 款式、奖品增删、总次数限制、中奖记录、CSV 导出、JSON 备份 |
+## 在线体验
 
-奖品支持名称、图片、份数与权重（权重越高越容易中）。抽中的奖品会从盘面移除，库存不会超发。
+打开 [Demo](https://youki258.github.io/lucky-wheel/) 即可抽奖，管理后台为 `/#/admin`，默认密码 `admin123`。
+
+Demo 数据保存在浏览器 localStorage，仅用于体验；换设备或清空缓存会重置。正式使用请部署完整版。
+
+<!-- 截图占位：录好 GIF 后取消注释
+<p align="center">
+  <img src="docs/screenshot-wheel.gif" width="32%" alt="大转盘" />
+  <img src="docs/screenshot-grid.gif" width="32%" alt="九宫格" />
+  <img src="docs/screenshot-slot.gif" width="32%" alt="老虎机" />
+</p>
+-->
 
 ## 快速开始
 
-### 方式一：在线 Demo
+### 在线 Demo
 
-直接访问上方链接即可体验。数据仅存于当前浏览器，适合预览与调试。
+无需安装，访问上方链接即可。
 
-### 方式二：Docker 自部署
+### Docker 部署
 
-适用于需要服务端记账、多端共享数据的正式场景：
+适合需要服务端记账、多端共享数据的正式场景：
 
 ```bash
 mkdir -p lucky-wheel && cd lucky-wheel
@@ -44,9 +56,15 @@ docker compose pull && docker compose up -d
 | `PORT` | `3001` | 对外端口 |
 | `ADMIN_PASSWORD` | `admin123` | 管理后台密码，**部署时务必修改** |
 
-数据持久化在宿主机 `data/` 目录（`config.json` 配置、`prizes.json` 奖品、`records.json` 记录）。升级镜像、重启容器不会丢失；直接修改 JSON 文件同样生效，无需重启。
+数据持久化在宿主机 `data/` 目录：
 
-常用运维命令：
+| 文件 | 内容 |
+|---|---|
+| `data/config.json` | 标题 / 文案 / 配色 / 款式 / 次数上限 |
+| `data/prizes.json` | 奖品列表（名称 / 图片 / 份数 / 权重） |
+| `data/records.json` | 本轮抽奖记录 |
+
+升级镜像、重启容器不会丢失数据；直接修改 JSON 同样生效，无需重启。
 
 ```bash
 docker compose pull && docker compose up -d   # 更新镜像
@@ -54,9 +72,9 @@ docker compose logs -f lucky-wheel            # 查看日志
 docker compose restart                        # 重启
 ```
 
-> 仓库附带 [`render.yaml`](render.yaml) 蓝图，可在 Render 等支持 Docker 的 PaaS 一键部署（免费档通常需绑定支付方式）。
+> 仓库附带 [`render.yaml`](render.yaml) 蓝图，可在 Render 等支持 Docker 的 PaaS 一键部署。
 
-## 本地开发
+### 本地开发
 
 ```bash
 pnpm install
