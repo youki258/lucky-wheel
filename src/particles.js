@@ -1,11 +1,11 @@
-// tsParticles 预设：抽奖页金色粒子徐徐上升；后台稀疏微光粒子
+// tsParticles 预设：抽奖页青粉霓虹粒子徐徐上升；后台稀疏微光粒子
 export const drawParticles = {
   fullScreen: { enable: false },
   fpsLimit: 60,
   detectRetina: true,
   particles: {
     number: { value: 46, density: { enable: true, width: 1200, height: 800 } },
-    color: { value: ['#a8c6de', '#6f9fce', '#ffffff', '#c7d9ea'] },
+    color: { value: ['#5eead4', '#f0abfc', '#ffffff', '#67e8f9'] },
     shape: { type: 'circle' },
     opacity: {
       value: { min: 0.08, max: 0.5 },
@@ -29,7 +29,7 @@ export const adminParticles = {
   detectRetina: true,
   particles: {
     number: { value: 20, density: { enable: true, width: 1400, height: 900 } },
-    color: { value: ['#a8c6de', '#6f9fce', '#d3e2f0'] },
+    color: { value: ['#5eead4', '#f0abfc', '#a5f3fc'] },
     shape: { type: 'circle' },
     opacity: {
       value: { min: 0.05, max: 0.35 },

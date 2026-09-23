@@ -5,11 +5,12 @@
 import { defaultConfig, defaultPrizes } from '../../server/default-data.js'
 import { sanitizeConfig, sanitizePrizes } from '../../server/sanitize.js'
 
+// v2：种子数据/主题改版时递增，旧 localStorage 自动作废并重新播种
 const KEY = {
-  config: 'lw_demo_config',
-  prizes: 'lw_demo_prizes',
-  records: 'lw_demo_records',
-  session: 'lw_demo_session',
+  config: 'lw_demo_config_v2',
+  prizes: 'lw_demo_prizes_v2',
+  records: 'lw_demo_records_v2',
+  session: 'lw_demo_session_v2',
 }
 
 const DEMO_PASSWORD = 'admin123'

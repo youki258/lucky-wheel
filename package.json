@@ -5,7 +5,7 @@
   "type": "module",
   "description": "配置驱动的大转盘抽奖系统：奖品/文案/颜色/款式/次数全部可配置",
   "license": "Apache-2.0",
-  "homepage": "https://lucky-wheel.youki.fun",
+  "homepage": "https://youki258.github.io/lucky-wheel/",
   "repository": {
     "type": "git",
     "url": "https://github.com/youki258/lucky-wheel.git"

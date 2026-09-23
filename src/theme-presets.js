@@ -1,8 +1,21 @@
-// 色彩预设 v2 —— 方向：比旧马卡龙系更饱和、更有对比；默认走「暗夜 + 鎏金」的
-// 现代抽奖大屏风（梯度背景 + 金色外圈 + 奶油扇区），其余预设覆盖浅色鲜活系与暗色系。
-// pageBgGradient 是可选的 CSS background 值（支持渐变），非空时优先于 pageBgColor 纯色。
+// 色彩预设 v3 —— 默认「霓虹派对」（深夜蓝绿 + 青粉霓虹 + 糖果扇区），
+// 其余预设覆盖鎏金暗夜与浅色鲜活系。pageBgGradient 非空时优先于 pageBgColor 纯色。
 // 点击应用到表单（同时清除奖品的自定义颜色，恢复自动配色），保存后生效；应用后仍可继续微调。
 export const themePresets = [
+  {
+    name: '霓虹派对',
+    colors: {
+      pageBgColor: '#042f2e',
+      pageBgGradient: 'linear-gradient(168deg,#042f2e 0%,#0f172a 48%,#1e1b4b 100%)',
+      titleColor: '#5eead4',
+      subtitleColor: '#f0abfc',
+      ringColor: '#f472b6',
+      buttonColor: '#2dd4bf',
+      buttonTextColor: '#042f2e',
+      textColor: '#0f172a',
+      sectorColors: ['#ffffff', '#ccfbf1', '#fce7f3', '#e0f2fe'],
+    },
+  },
   {
     name: '星夜鎏金',
     colors: {

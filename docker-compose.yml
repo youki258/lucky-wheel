@@ -1,7 +1,6 @@
 services:
   lucky-wheel:
-    # GitHub Actions 构建的镜像（私有，服务器需 docker login ghcr.io）；
-    # 有源码时 compose build 可本地构建，两种方式都通
+    # GHCR 公开镜像（CI 自动发布，无需 login）；有源码时也可 compose build
     image: ghcr.io/youki258/lucky-wheel:latest
     build: .
     container_name: lucky-wheel
